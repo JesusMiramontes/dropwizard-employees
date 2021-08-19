@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "employee")
+@NamedQueries({
+        @NamedQuery(name = "com.miramontes.EmployeeModel.findAll", query = "SELECT e FROM EmployeeModel e")
+})
 public class EmployeeModel {
 
     @Id
