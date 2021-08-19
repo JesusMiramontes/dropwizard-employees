@@ -5,6 +5,7 @@ import model.EmployeeModel;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public class EmployeeDao extends AbstractDAO<EmployeeModel> {
@@ -18,12 +19,16 @@ public class EmployeeDao extends AbstractDAO<EmployeeModel> {
     }
 
     public List<EmployeeModel> findAll() {
-        return list(namedTypedQuery("com.miramontes.EmployeeModel.findAll"));
+        //return list(namedTypedQuery("com.miramontes.EmployeeModel.findAll"));
+        CriteriaQuery<EmployeeModel> query = currentSession().getCriteriaBuilder().createQuery(EmployeeModel.class);
+        query.from(EmployeeModel.class);
+        return currentSession().createQuery(query).getResultList();
     }
 
     public EmployeeModel getEmployeeById(Integer id){
         try{
-            return (EmployeeModel) namedQuery("com.miramontes.EmployeeModel.findById").setParameter("emp_id", id).getSingleResult();
+            //return (EmployeeModel) namedQuery("com.miramontes.EmployeeModel.findById").setParameter("emp_id", id).getSingleResult();
+            return currentSession().get(EmployeeModel.class, id);
         } catch (NoResultException e){
             return null;
         }
