@@ -5,18 +5,24 @@ import dao.EmployeeDao;
 import io.dropwizard.hibernate.UnitOfWork;
 import model.EmployeeModel;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.Set;
 
 @Path("/employee")
 @Produces(MediaType.APPLICATION_JSON)
 public class EmployeeController {
 
     private EmployeeDao employeeDao;
+    private final Validator validator;
 
-    public EmployeeController(EmployeeDao employeeDao) {
+    public EmployeeController(EmployeeDao employeeDao, Validator validator) {
         this.employeeDao = employeeDao;
+        this.validator = validator;
     }
 
     @GET
@@ -41,6 +47,17 @@ public class EmployeeController {
     @Timed
     @UnitOfWork
     public Response insertEmployee(EmployeeModel employee){
+        // Validation
+        Set<ConstraintViolation<EmployeeModel>> violations = validator.validate(employee);
+
+        if(violations.size() > 0){
+            ArrayList<String> validationMessages = new ArrayList<>();
+            for (ConstraintViolation<EmployeeModel>violation : violations){
+                validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
+            }
+            return Response.status(Response.Status.BAD_REQUEST).entity(validationMessages).build();
+        }
+        
         employeeDao.insertEmployee(employee);
         return Response.ok().build();
     }

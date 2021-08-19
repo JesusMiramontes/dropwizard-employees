@@ -17,7 +17,7 @@ public class EmployeeAppRunner extends Application<DatabaseConfig> {
     public void run(DatabaseConfig myConfiguration, Environment environment) throws Exception {
         System.out.println("Value from dev.yml is "+myConfiguration.getDatabase().getUser());
         EmployeeDao infoDao = new EmployeeDao(hibernate.getSessionFactory());
-        final EmployeeController resource = new EmployeeController(infoDao);
+        final EmployeeController resource = new EmployeeController(infoDao, environment.getValidator());
         environment.jersey().register(resource);
 
     }
