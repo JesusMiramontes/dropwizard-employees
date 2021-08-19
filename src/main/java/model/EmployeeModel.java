@@ -26,6 +26,18 @@ public class EmployeeModel {
     @Column(name = "position")
     private String position;
 
+    public EmployeeModel() {
+    }
+
+    public EmployeeModel(Integer emp_id, String name, String lastname, String email, String country, String position) {
+        this.emp_id = emp_id;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.country = country;
+        this.position = position;
+    }
+
     public Integer getEmp_id() {
         return emp_id;
     }
