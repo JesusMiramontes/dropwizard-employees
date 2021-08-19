@@ -15,7 +15,7 @@ public class EmployeeModel {
 
     @Id
     @Column(name = "emp_id")
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer emp_id;
 
     @Column(name = "name")
