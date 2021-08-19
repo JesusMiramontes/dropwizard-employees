@@ -11,7 +11,6 @@ import javax.persistence.*;
 public class EmployeeModel {
 
     @Id
-    @GeneratedValue
     @Column(name = "emp_id")
     private Integer emp_id;
 

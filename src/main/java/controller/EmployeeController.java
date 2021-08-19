@@ -5,10 +5,7 @@ import dao.EmployeeDao;
 import io.dropwizard.hibernate.UnitOfWork;
 import model.EmployeeModel;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -38,5 +35,13 @@ public class EmployeeController {
         if(employee != null)
             return Response.ok(employee).build();
         return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
+    @POST
+    @Timed
+    @UnitOfWork
+    public Response insertEmployee(EmployeeModel employee){
+        employeeDao.save(employee);
+        return Response.ok().build();
     }
 }

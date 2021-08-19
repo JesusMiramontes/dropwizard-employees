@@ -28,4 +28,8 @@ public class EmployeeDao extends AbstractDAO<EmployeeModel> {
             return null;
         }
     }
+
+    public void save(EmployeeModel e){
+        persist(e);
+    }
 }
