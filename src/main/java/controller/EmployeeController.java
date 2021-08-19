@@ -41,7 +41,22 @@ public class EmployeeController {
     @Timed
     @UnitOfWork
     public Response insertEmployee(EmployeeModel employee){
-        employeeDao.save(employee);
+        employeeDao.insertEmployee(employee);
+        return Response.ok().build();
+    }
+
+    @PUT
+    @Timed
+    @UnitOfWork
+    @Path("/{id}")
+    public Response updateEmployee(@PathParam("id") Integer id, EmployeeModel employee){
+        EmployeeModel foundEmployee = employeeDao.getEmployeeById(id);
+        if(foundEmployee == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        employee.setEmp_id(id);
+        employeeDao.update(employee);
         return Response.ok().build();
     }
 }

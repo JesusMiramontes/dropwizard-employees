@@ -29,7 +29,13 @@ public class EmployeeDao extends AbstractDAO<EmployeeModel> {
         }
     }
 
-    public void save(EmployeeModel e){
+    public void insertEmployee(EmployeeModel e){
+        currentSession().clear();
         persist(e);
+    }
+
+    public void update(EmployeeModel employee){
+        currentSession().clear();
+        currentSession().update(employee);
     }
 }
