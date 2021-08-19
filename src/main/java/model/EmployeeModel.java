@@ -1,6 +1,8 @@
 package model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "employee")
@@ -15,6 +17,8 @@ public class EmployeeModel {
     private Integer emp_id;
 
     @Column(name = "name")
+    @Min(3)
+    @Max(255)
     private String name;
 
     @Column(name = "lastname")
