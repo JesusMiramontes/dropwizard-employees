@@ -1,8 +1,9 @@
 package model;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "employee")
@@ -14,23 +15,27 @@ public class EmployeeModel {
 
     @Id
     @Column(name = "emp_id")
+    @NotNull
     private Integer emp_id;
 
     @Column(name = "name")
-    @Min(3)
-    @Max(255)
+    @NotBlank @Length(min=2, max=255)
     private String name;
 
     @Column(name = "lastname")
+    @NotBlank @Length(min=2, max=255)
     private String lastname;
 
     @Column(name = "email")
+    @Pattern(regexp = ".+@.+\\.[a-z]+")
     private String email;
 
     @Column(name = "country")
+    @NotBlank @Length(min=2, max=255)
     private String country;
 
     @Column(name = "position")
+    @NotBlank @Length(min=2, max=255)
     private String position;
 
     public EmployeeModel() {
