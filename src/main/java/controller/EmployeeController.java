@@ -67,6 +67,17 @@ public class EmployeeController {
     @UnitOfWork
     @Path("/{id}")
     public Response updateEmployee(@PathParam("id") Integer id, EmployeeModel employee){
+        // Validation
+        Set<ConstraintViolation<EmployeeModel>> violations = validator.validate(employee);
+
+        if(violations.size() > 0){
+            ArrayList<String> validationMessages = new ArrayList<>();
+            for (ConstraintViolation<EmployeeModel>violation : violations){
+                validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
+            }
+            return Response.status(Response.Status.BAD_REQUEST).entity(validationMessages).build();
+        }
+
         EmployeeModel foundEmployee = employeeDao.getEmployeeById(id);
         if(foundEmployee == null){
             return Response.status(Response.Status.NOT_FOUND).build();
