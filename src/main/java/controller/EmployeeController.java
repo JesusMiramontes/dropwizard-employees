@@ -59,4 +59,17 @@ public class EmployeeController {
         employeeDao.update(employee);
         return Response.ok().build();
     }
+
+    @DELETE
+    @Timed
+    @UnitOfWork
+    @Path("/{id}")
+    public Response deleteEmployee(@PathParam("id") Integer id){
+        EmployeeModel employee = employeeDao.getEmployeeById(id);
+        if(employee == null)
+            return Response.status(Response.Status.NOT_FOUND).build();
+
+        employeeDao.delete(employee);
+        return Response.ok().build();
+    }
 }

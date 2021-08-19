@@ -38,4 +38,9 @@ public class EmployeeDao extends AbstractDAO<EmployeeModel> {
         currentSession().clear();
         currentSession().update(employee);
     }
+
+    public void delete(EmployeeModel employee){
+        currentSession().clear();
+        currentSession().delete(employee);
+    }
 }
