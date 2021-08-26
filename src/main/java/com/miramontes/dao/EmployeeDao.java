@@ -1,7 +1,8 @@
-package dao;
+package com.miramontes.dao;
 
+import com.google.inject.Inject;
 import io.dropwizard.hibernate.AbstractDAO;
-import model.EmployeeModel;
+import com.miramontes.model.EmployeeModel;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.NoResultException;
@@ -14,6 +15,7 @@ public class EmployeeDao extends AbstractDAO<EmployeeModel> {
      *
      * @param sessionFactory a session provider
      */
+    @Inject
     public EmployeeDao(SessionFactory sessionFactory) {
         super(sessionFactory);
     }

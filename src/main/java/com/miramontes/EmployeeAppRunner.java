@@ -1,12 +1,15 @@
-import config.DatabaseConfig;
-import controller.EmployeeController;
-import dao.EmployeeDao;
+package com.miramontes;
+
+import com.miramontes.config.DatabaseConfig;
+import com.miramontes.controller.EmployeeController;
+import com.miramontes.dao.EmployeeDao;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import model.EmployeeModel;
+import com.miramontes.model.EmployeeModel;
+import ru.vyarus.dropwizard.guice.GuiceBundle;
 
 public class EmployeeAppRunner extends Application<DatabaseConfig> {
 
@@ -17,7 +20,7 @@ public class EmployeeAppRunner extends Application<DatabaseConfig> {
     public void run(DatabaseConfig myConfiguration, Environment environment) throws Exception {
         System.out.println("Value from dev.yml is "+myConfiguration.getDatabase().getUser());
         EmployeeDao infoDao = new EmployeeDao(hibernate.getSessionFactory());
-        final EmployeeController resource = new EmployeeController(infoDao, environment.getValidator());
+        final EmployeeController resource = new EmployeeController(infoDao/*, environment.getValidator()*/);
         environment.jersey().register(resource);
 
     }
@@ -36,6 +39,9 @@ public class EmployeeAppRunner extends Application<DatabaseConfig> {
 
     @Override
     public void initialize(Bootstrap<DatabaseConfig> bootstrap) {
-        bootstrap.addBundle(hibernate);
+        bootstrap.addBundle(GuiceBundle.builder()
+        .enableAutoConfig(getClass().getPackage().getName())
+        .build());
+//        bootstrap.addBundle(hibernate);
     }
 }

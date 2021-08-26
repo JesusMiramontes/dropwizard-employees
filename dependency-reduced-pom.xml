@@ -15,7 +15,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>EmployeeAppRunner</mainClass>
+              <mainClass>com.miramontes.EmployeeAppRunner</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -33,7 +33,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>EmployeeAppRunner</mainClass>
+                  <mainClass>com.miramontes.EmployeeAppRunner</mainClass>
                 </transformer>
               </transformers>
             </configuration>

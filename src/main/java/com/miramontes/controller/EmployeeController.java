@@ -1,9 +1,10 @@
-package controller;
+package com.miramontes.controller;
 
 import com.codahale.metrics.annotation.Timed;
-import dao.EmployeeDao;
+import com.google.inject.Inject;
+import com.miramontes.dao.EmployeeDao;
 import io.dropwizard.hibernate.UnitOfWork;
-import model.EmployeeModel;
+import com.miramontes.model.EmployeeModel;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -17,12 +18,14 @@ import java.util.Set;
 @Produces(MediaType.APPLICATION_JSON)
 public class EmployeeController {
 
+    @Inject
     private EmployeeDao employeeDao;
-    private final Validator validator;
+//    private final Validator validator;
 
-    public EmployeeController(EmployeeDao employeeDao, Validator validator) {
+    @Inject
+    public EmployeeController(EmployeeDao employeeDao/*, Validator validator*/) {
         this.employeeDao = employeeDao;
-        this.validator = validator;
+//        this.validator = validator;
     }
 
     @GET
@@ -47,16 +50,16 @@ public class EmployeeController {
     @Timed
     @UnitOfWork
     public Response insertEmployee(EmployeeModel employee){
-        // Validation
-        Set<ConstraintViolation<EmployeeModel>> violations = validator.validate(employee);
-
-        if(violations.size() > 0){
-            ArrayList<String> validationMessages = new ArrayList<>();
-            for (ConstraintViolation<EmployeeModel>violation : violations){
-                validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
-            }
-            return Response.status(Response.Status.BAD_REQUEST).entity(validationMessages).build();
-        }
+//        // Validation
+//        Set<ConstraintViolation<EmployeeModel>> violations = validator.validate(employee);
+//
+//        if(violations.size() > 0){
+//            ArrayList<String> validationMessages = new ArrayList<>();
+//            for (ConstraintViolation<EmployeeModel>violation : violations){
+//                validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
+//            }
+//            return Response.status(Response.Status.BAD_REQUEST).entity(validationMessages).build();
+//        }
         
         employeeDao.insertEmployee(employee);
         return Response.ok().build();
@@ -67,16 +70,16 @@ public class EmployeeController {
     @UnitOfWork
     @Path("/{id}")
     public Response updateEmployee(@PathParam("id") Integer id, EmployeeModel employee){
-        // Validation
-        Set<ConstraintViolation<EmployeeModel>> violations = validator.validate(employee);
-
-        if(violations.size() > 0){
-            ArrayList<String> validationMessages = new ArrayList<>();
-            for (ConstraintViolation<EmployeeModel>violation : violations){
-                validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
-            }
-            return Response.status(Response.Status.BAD_REQUEST).entity(validationMessages).build();
-        }
+//        // Validation
+//        Set<ConstraintViolation<EmployeeModel>> violations = validator.validate(employee);
+//
+//        if(violations.size() > 0){
+//            ArrayList<String> validationMessages = new ArrayList<>();
+//            for (ConstraintViolation<EmployeeModel>violation : violations){
+//                validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
+//            }
+//            return Response.status(Response.Status.BAD_REQUEST).entity(validationMessages).build();
+//        }
 
         EmployeeModel foundEmployee = employeeDao.getEmployeeById(id);
         if(foundEmployee == null){
