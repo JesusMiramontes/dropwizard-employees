@@ -21,6 +21,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
+    container_name: employees-phpmyadmin
     ports:
       - 8181:80
     environment:
