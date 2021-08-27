@@ -1,4 +1,4 @@
-package config;
+package com.miramontes.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;

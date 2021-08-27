@@ -1,4 +1,4 @@
-package model;
+package com.miramontes.model;
 
 import org.hibernate.validator.constraints.Length;
 

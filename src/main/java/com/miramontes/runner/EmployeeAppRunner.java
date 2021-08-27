@@ -1,12 +1,14 @@
-import config.DatabaseConfig;
-import controller.EmployeeController;
-import dao.EmployeeDao;
+package com.miramontes.runner;
+
+import com.miramontes.config.DatabaseConfig;
+import com.miramontes.controller.EmployeeController;
+import com.miramontes.dao.EmployeeDao;
+import com.miramontes.model.EmployeeModel;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import model.EmployeeModel;
 
 public class EmployeeAppRunner extends Application<DatabaseConfig> {
 

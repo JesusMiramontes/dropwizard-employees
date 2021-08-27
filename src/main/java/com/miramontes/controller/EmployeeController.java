@@ -1,9 +1,9 @@
-package controller;
+package com.miramontes.controller;
 
 import com.codahale.metrics.annotation.Timed;
-import dao.EmployeeDao;
+import com.miramontes.dao.EmployeeDao;
 import io.dropwizard.hibernate.UnitOfWork;
-import model.EmployeeModel;
+import com.miramontes.model.EmployeeModel;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;

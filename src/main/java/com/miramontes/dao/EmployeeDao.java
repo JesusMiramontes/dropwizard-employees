@@ -1,7 +1,7 @@
-package dao;
+package com.miramontes.dao;
 
 import io.dropwizard.hibernate.AbstractDAO;
-import model.EmployeeModel;
+import com.miramontes.model.EmployeeModel;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.NoResultException;
