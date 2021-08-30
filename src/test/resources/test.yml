@@ -1,0 +1,22 @@
+database:
+  driverClass: com.mysql.cj.jdbc.Driver
+  user: root
+  password:
+  url: jdbc:mysql://localhost:3306/dropwizard-employees
+  properties:
+    charSet: UTF-8
+
+server:
+  applicationContextPath: /
+  adminContextPath: /
+  applicationConnectors:
+    - type: http
+      port: 8081
+  adminConnectors:
+    - type: http
+      port: 8082
+
+logging:
+  level: INFO
+  loggers:
+    com.majidalfuttaim: DEBUG
