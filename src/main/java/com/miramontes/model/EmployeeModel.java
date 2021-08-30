@@ -19,23 +19,24 @@ public class EmployeeModel {
     private Integer emp_id;
 
     @Column(name = "name")
-    @NotBlank @Length(min=2, max=255)
+    @NotBlank @Length(min=2, max=50)
     private String name;
 
     @Column(name = "lastname")
-    @NotBlank @Length(min=2, max=255)
+    @NotBlank @Length(min=2, max=50)
     private String lastname;
 
     @Column(name = "email")
     @Pattern(regexp = ".+@.+\\.[a-z]+")
+    @NotBlank @Length(min=2, max=50)
     private String email;
 
     @Column(name = "country")
-    @NotBlank @Length(min=2, max=255)
+    @NotBlank @Length(min=2, max=50)
     private String country;
 
     @Column(name = "position")
-    @NotBlank @Length(min=2, max=255)
+    @NotBlank @Length(min=2, max=50)
     private String position;
 
     public EmployeeModel() {
